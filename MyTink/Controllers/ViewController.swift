@@ -15,12 +15,14 @@ class ViewController: UIViewController {
         return tableView
     }()
     
-    let news = ["1ajsdhajkshdakjshdakshdas1ajsdhajkshdakjshdakshdas1ajsdhajkshdakjshdakshdas1ajsdhajkshdakjshdakshdas1ajsdhajkshdakjshdakshdas1ajsdhajkshdakjshdakshdas1ajsdhajkshdakjshdakshdas", "asdkasjhdakjsdhaksjdhmnbxmznxbvkajhiquwyeiquyrjsdhfmnbvcmxncbvmxncvbkjshdfsdkhjfgqowieuqoiwueqoiwuekjahsdkjahsdnbxzcvmnxbcvmnxcbvkasjhdkajshdoqiuweyqowuey"]
+    var news = [News]()
     let images = ["square.and.arrow.up", "square.and.arrow.up.fill"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configViews()
+        
+        fetchData()
     }
     
     func configViews() {
@@ -42,6 +44,17 @@ class ViewController: UIViewController {
         ])
     }
     
+    func fetchData() {
+        NetworkManager.shared.fetchData { [weak self] result in
+            switch result {
+            case .success(let news):
+                self?.news = news
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -56,10 +69,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.idCell, for: indexPath) as? TableViewCell else {return UITableViewCell()}
         
-        cell.newsTitle.text = news[indexPath.row]
-        cell.newsImage.image = UIImage(systemName: images[indexPath.row])
+        let news = news[indexPath.row]
+        cell.configViews(news: news)
         
-        return cell
+            return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
