@@ -32,8 +32,6 @@ class TableViewCell: UITableViewCell {
         }
     }
     
-    var url: String?
-    
     var countsOfViews: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +60,6 @@ class TableViewCell: UITableViewCell {
     }
     
     func configViews(news: News) {
-        //print(news.urlToImage)
         newsTitle.text = news.title
         imageURL = URL(string: news.urlToImage ?? "https://www.clipartmax.com/png/full/417-4172781_the-bill-of-rights-is-a-part-of-the-constitution-news-clipart.png")
     }
