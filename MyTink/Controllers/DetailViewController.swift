@@ -44,7 +44,6 @@ class DetailViewController: UIViewController {
     let newsImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
-        imageView.image = UIImage(systemName: "lasso")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -70,6 +69,19 @@ class DetailViewController: UIViewController {
         descriptionLabel.text = news?.description
         datePublished.text = news?.publishedAt?.replacingOccurrences(of: "T", with: " ").replacingOccurrences(of: "Z", with: " ")
         author.text = news?.author
+        setImage()
+    }
+    
+    func setImage() {
+        guard let url = URL(string: news?.urlToImage ?? "https://www.clipartmax.com/png/full/417-4172781_the-bill-of-rights-is-a-part-of-the-constitution-news-clipart.png") else {return}
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                DispatchQueue.main.async {
+                    self?.newsImage.image = UIImage(data: data)
+                }
+            }
+        }
+        
     }
 
     

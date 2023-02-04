@@ -6,6 +6,15 @@
 //
 
 import Foundation
+//
+//protocol NetworkProtocol: Codable {
+//    var author: String? {get set}
+//    var title: String? {get set}
+//    var description: String? {get set}
+//    var url: String? {get set}
+//    var urlToImage: String? {get set}
+//    var publishedAt: String? {get set}
+//}
 
 struct Envelope: Decodable {
     let status: String?
@@ -13,12 +22,13 @@ struct Envelope: Decodable {
     let articles: [News]
 }
 
-struct News: Decodable {
-    let author: String?
-    let title: String?
-    let description: String?
-    let url: String?
-    let urlToImage: String?
-    let publishedAt: String?
-    
+class News: Decodable {
+    var author: String?
+    var title: String?
+    var description: String?
+    var url: String?
+    var urlToImage: String?
+    var publishedAt: String?
 }
+
+
