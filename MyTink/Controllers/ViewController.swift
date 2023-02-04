@@ -21,11 +21,19 @@ class ViewController: UIViewController {
         }
     }
     
+    private let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configViews()
-        
         fetchData()
+        configurePullToRefresh()
+    }
+    
+    private func configurePullToRefresh() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Updating")
+        refreshControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+        tableView.addSubview(refreshControl)
     }
     
     func configViews() {
@@ -47,12 +55,15 @@ class ViewController: UIViewController {
         ])
     }
     
-    func fetchData() {
+    @objc func fetchData() {
         NetworkManager.shared.fetchData { [weak self] result in
             switch result {
             case .success(let news):
                 self?.finalNews = news
                 self?.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
