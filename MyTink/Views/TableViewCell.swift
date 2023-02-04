@@ -52,16 +52,16 @@ class TableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setConstraints()
         
-        countsOfViews.text = "1"
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configViews(news: News) {
-        newsTitle.text = news.title
-        imageURL = URL(string: news.urlToImage ?? "https://www.clipartmax.com/png/full/417-4172781_the-bill-of-rights-is-a-part-of-the-constitution-news-clipart.png")
+    func configViews(finalNews: FinalNews) {
+        newsTitle.text = finalNews.title
+        countsOfViews.text = String(finalNews.views)
+        imageURL = URL(string: finalNews.urlToImage ?? "https://www.clipartmax.com/png/full/417-4172781_the-bill-of-rights-is-a-part-of-the-constitution-news-clipart.png")
     }
     
     func updateUI() {

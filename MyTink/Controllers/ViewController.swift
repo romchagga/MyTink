@@ -15,8 +15,11 @@ class ViewController: UIViewController {
         return tableView
     }()
     
-    var news = [News]()
-    let images = ["square.and.arrow.up", "square.and.arrow.up.fill"]
+    var finalNews: Array<FinalNews> = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +51,7 @@ class ViewController: UIViewController {
         NetworkManager.shared.fetchData { [weak self] result in
             switch result {
             case .success(let news):
-                self?.news = news
+                self?.finalNews = news
                 self?.tableView.reloadData()
             case .failure(let error):
                 print(error.localizedDescription)
@@ -61,7 +64,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        news.count
+        finalNews.count
     }
     
     
@@ -69,8 +72,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.idCell, for: indexPath) as? TableViewCell else {return UITableViewCell()}
         
-        let news = news[indexPath.row]
-        cell.configViews(news: news)
+        let news = finalNews[indexPath.row]
+        cell.configViews(finalNews: news)
         
             return cell
     }
@@ -78,7 +81,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailVC = DetailViewController()
-        detailVC.news = news[indexPath.row]
+        detailVC.news = finalNews[indexPath.row]
+        finalNews[indexPath.row].views += 1
         navigationController?.pushViewController(detailVC, animated: true)
     }
     

@@ -9,7 +9,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var news: News?
+    var news: FinalNews?
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -60,6 +60,13 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setConstraints()
         setViews()
+        tapForWeb.addTarget(self, action: #selector(openWebPage) , for: .touchUpInside)
+    }
+    
+    @objc func openWebPage() {
+        let webPageViewController = WebPageViewController()
+        webPageViewController.urlString = news?.url
+        self.navigationController?.pushViewController(webPageViewController, animated: true)
     }
     
     func setViews() {

@@ -19,7 +19,7 @@ final class NetworkManager {
     
     private init() {}
     
-    func fetchData(completion: @escaping(Result<[News], NetworkError>) -> Void) {
+    func fetchData(completion: @escaping(Result<[FinalNews], NetworkError>) -> Void) {
         guard let url = URL(string:"https://newsapi.org/v2/top-headlines?country=ru&category=sport&apiKey=6457ff1fb8e64104ab6a3631f330fcdc") else {
             completion(.failure(.invalidURL))
             return
@@ -34,7 +34,11 @@ final class NetworkManager {
             do {
                 let envelope = try JSONDecoder().decode(Envelope.self, from: data)
                 DispatchQueue.main.async {
-                    completion(.success(envelope.articles))
+                    var finalNews = [FinalNews]()
+                    envelope.articles.forEach { news in
+                        finalNews.append(FinalNews(news: news))
+                    }
+                    completion(.success(finalNews))
                 }
             } catch {
                 completion(.failure(.decodingError))
