@@ -15,18 +15,21 @@ class ViewController: UIViewController {
         return tableView
     }()
     
-    var finalNews: Array<FinalNews> = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var finalNews: Array<FinalNews> = []
     
     private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let saved = CacheManager.shared.getNews(), !saved.isEmpty {
+            print(saved)
+            finalNews = saved
+        } else {
+            fetchData()
+        }
+        
         configViews()
-        fetchData()
         configurePullToRefresh()
     }
     
@@ -60,6 +63,7 @@ class ViewController: UIViewController {
             switch result {
             case .success(let news):
                 self?.finalNews = news
+                CacheManager.shared.saveNews(news: self!.finalNews)
                 self?.tableView.reloadData()
                 DispatchQueue.main.async {
                     self?.refreshControl.endRefreshing()
@@ -94,6 +98,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let detailVC = DetailViewController()
         detailVC.news = finalNews[indexPath.row]
         finalNews[indexPath.row].views += 1
+        CacheManager.shared.saveNews(news: self.finalNews)
+        tableView.reloadData()
         navigationController?.pushViewController(detailVC, animated: true)
     }
     

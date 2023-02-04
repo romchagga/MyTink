@@ -22,7 +22,7 @@ struct Envelope: Decodable {
     let articles: [News]
 }
 
-class News: Decodable {
+struct News: Decodable {
     var author: String?
     var title: String?
     var description: String?

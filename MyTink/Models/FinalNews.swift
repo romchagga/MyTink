@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FinalNews {
+struct FinalNews: Encodable, Decodable {
     var author: String?
     var title: String?
     var description: String?

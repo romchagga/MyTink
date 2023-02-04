@@ -18,6 +18,7 @@
 		FAA93BF1298D97D50015A897 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA93BF0298D97D50015A897 /* DetailViewController.swift */; };
 		FAA93BFB298E8E480015A897 /* FinalNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA93BFA298E8E480015A897 /* FinalNews.swift */; };
 		FAA93BFD298E91FA0015A897 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA93BFC298E91FA0015A897 /* WebPageViewController.swift */; };
+		FAA93C00298EA11E0015A897 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA93BFF298EA11E0015A897 /* CacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		FAA93BF0298D97D50015A897 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FAA93BFA298E8E480015A897 /* FinalNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalNews.swift; sourceTree = "<group>"; };
 		FAA93BFC298E91FA0015A897 /* WebPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
+		FAA93BFF298EA11E0015A897 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			children = (
 				FAA93BE8298D7D690015A897 /* Application */,
 				FAA93BED298D7F200015A897 /* Networking */,
+				FAA93BFE298EA0A40015A897 /* Cache  */,
 				FAA93BEC298D7E230015A897 /* Models */,
 				FAA93BE6298D7D560015A897 /* Controllers */,
 				FAA93BE7298D7D600015A897 /* Views */,
@@ -128,6 +131,14 @@
 				FAA93BEE298D7F310015A897 /* NetworkManager.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		FAA93BFE298EA0A40015A897 /* Cache  */ = {
+			isa = PBXGroup;
+			children = (
+				FAA93BFF298EA11E0015A897 /* CacheManager.swift */,
+			);
+			path = "Cache ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +217,7 @@
 				FA798203298D71FC00D1485C /* ViewController.swift in Sources */,
 				FA798213298D72DE00D1485C /* TableViewCell.swift in Sources */,
 				FA7981FF298D71FC00D1485C /* AppDelegate.swift in Sources */,
+				FAA93C00298EA11E0015A897 /* CacheManager.swift in Sources */,
 				FAA93BEB298D7E1F0015A897 /* News.swift in Sources */,
 				FA798201298D71FC00D1485C /* SceneDelegate.swift in Sources */,
 				FAA93BF1298D97D50015A897 /* DetailViewController.swift in Sources */,
@@ -276,7 +288,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -330,7 +342,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
