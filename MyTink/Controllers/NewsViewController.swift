@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class NewsViewController: UIViewController {
     
     private var tableView: UITableView = {
         let tableView = UITableView()
@@ -23,7 +23,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         if let saved = CacheManager.shared.getNews(), !saved.isEmpty {
-            print(saved)
             finalNews = saved
         } else {
             fetchData()
@@ -75,7 +74,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
